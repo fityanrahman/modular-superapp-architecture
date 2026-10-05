@@ -1,0 +1,29 @@
+name: food_dev_app
+description: "Development host application for the Food module only, using a MockPaymentLauncher."
+publish_to: none
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.13.4
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  flutter_bloc: ^9.1.1
+  core:
+    path: ../../core
+  contracts:
+    path: ../../contracts
+  design_system:
+    path: ../../design_system
+  food:
+    path: ../../modules/food
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true

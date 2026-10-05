@@ -1,0 +1,33 @@
+name: consumer_app
+description: "SuperApp consumer application. The application shell that composes Ride, Food and Wallet."
+publish_to: none
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.13.4
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  flutter_bloc: ^9.1.1
+  core:
+    path: ../../core
+  contracts:
+    path: ../../contracts
+  design_system:
+    path: ../../design_system
+  ride:
+    path: ../../modules/ride
+  food:
+    path: ../../modules/food
+  wallet:
+    path: ../../modules/wallet
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true

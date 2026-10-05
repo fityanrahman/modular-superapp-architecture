@@ -1,0 +1,27 @@
+name: ride
+description: "Ride feature module: destination selection, ride request and ride status."
+version: 0.0.1
+publish_to: none
+
+environment:
+  sdk: ^3.13.4
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_bloc: ^9.1.1
+  equatable: ^3.0.0
+  core:
+    path: ../../core
+  contracts:
+    path: ../../contracts
+  design_system:
+    path: ../../design_system
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
