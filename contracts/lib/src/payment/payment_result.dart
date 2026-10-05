@@ -12,11 +12,9 @@ class PaymentResult {
     this.message = 'Payment successful',
   }) : success = true;
 
-  const PaymentResult.failure({
-    required this.message,
-    this.amount = 0,
-  })  : success = false,
-        transactionId = null;
+  const PaymentResult.failure({required this.message, this.amount = 0})
+    : success = false,
+      transactionId = null;
 
   final bool success;
   final String message;

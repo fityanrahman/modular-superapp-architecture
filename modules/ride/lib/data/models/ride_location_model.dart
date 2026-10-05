@@ -15,8 +15,8 @@ class RideLocationModel extends RideLocation {
       );
 
   Map<String, dynamic> toJson() => {
-        'name': name,
-        'address': address,
-        'estimatedFare': estimatedFare,
-      };
+    'name': name,
+    'address': address,
+    'estimatedFare': estimatedFare,
+  };
 }

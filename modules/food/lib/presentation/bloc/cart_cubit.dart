@@ -12,9 +12,7 @@ class CartCubit extends Cubit<Cart> {
     final int index = items.indexWhere((entry) => entry.item.id == item.id);
 
     if (index >= 0) {
-      items[index] = items[index].copyWith(
-        quantity: items[index].quantity + 1,
-      );
+      items[index] = items[index].copyWith(quantity: items[index].quantity + 1);
     } else {
       items.add(CartItem(item: item, quantity: 1));
     }
@@ -34,9 +32,7 @@ class CartCubit extends Cubit<Cart> {
     if (index < 0) {
       return;
     }
-    items[index] = items[index].copyWith(
-      quantity: items[index].quantity + 1,
-    );
+    items[index] = items[index].copyWith(quantity: items[index].quantity + 1);
     _emitItems(items);
   }
 
@@ -50,18 +46,14 @@ class CartCubit extends Cubit<Cart> {
     if (items[index].quantity <= 1) {
       items.removeAt(index);
     } else {
-      items[index] = items[index].copyWith(
-        quantity: items[index].quantity - 1,
-      );
+      items[index] = items[index].copyWith(quantity: items[index].quantity - 1);
     }
 
     _emitItems(items);
   }
 
   void removeItem(FoodItem item) {
-    _emitItems(
-      state.items.where((entry) => entry.item.id != item.id).toList(),
-    );
+    _emitItems(state.items.where((entry) => entry.item.id != item.id).toList());
   }
 
   void clear() => emit(const Cart());

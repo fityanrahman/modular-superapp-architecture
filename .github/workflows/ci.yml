@@ -6,111 +6,37 @@ on:
   pull_request:
 
 jobs:
-  changes:
-    name: Detect changed packages
+  quality:
+    name: Bootstrap, analyze and test
     runs-on: ubuntu-latest
-    outputs:
-      core: ${{ steps.filter.outputs.core }}
-      contracts: ${{ steps.filter.outputs.contracts }}
-      design_system: ${{ steps.filter.outputs.design_system }}
-      food: ${{ steps.filter.outputs.food }}
-      ride: ${{ steps.filter.outputs.ride }}
-      wallet: ${{ steps.filter.outputs.wallet }}
-      apps: ${{ steps.filter.outputs.apps }}
-    steps:
-      - uses: actions/checkout@v4
-      - id: filter
-        uses: dorny/paths-filter@v3
-        with:
-          filters: |
-            core:
-              - 'core/**'
-            contracts:
-              - 'contracts/**'
-            design_system:
-              - 'design_system/**'
-            food:
-              - 'modules/food/**'
-            ride:
-              - 'modules/ride/**'
-            wallet:
-              - 'modules/wallet/**'
-            apps:
-              - 'apps/**'
-
-  shared:
-    name: Shared (${{ matrix.package }})
-    runs-on: ubuntu-latest
-    needs: changes
-    if: ${{ needs.changes.outputs.core == 'true' || needs.changes.outputs.contracts == 'true' || needs.changes.outputs.design_system == 'true' }}
-    strategy:
-      fail-fast: false
-      matrix:
-        package: [contracts, core, design_system]
     steps:
       - uses: actions/checkout@v4
       - uses: subosito/flutter-action@v2
         with:
           channel: stable
-      - name: Pub get
-        run: flutter pub get
-        working-directory: ${{ matrix.package }}
-      - name: Analyze
-        run: flutter analyze
-        working-directory: ${{ matrix.package }}
-      - name: Test
-        run: flutter test
-        working-directory: ${{ matrix.package }}
-
-  modules:
-    name: Module (${{ matrix.module }})
-    runs-on: ubuntu-latest
-    needs: changes
-    if: ${{ needs.changes.outputs.food == 'true' || needs.changes.outputs.ride == 'true' || needs.changes.outputs.wallet == 'true' }}
-    strategy:
-      fail-fast: false
-      matrix:
-        module: [food, ride, wallet]
-    steps:
-      - uses: actions/checkout@v4
-      - uses: subosito/flutter-action@v2
-        with:
-          channel: stable
-      - name: Pub get module
-        run: flutter pub get
-        working-directory: modules/${{ matrix.module }}
-      - name: Analyze module
-        run: flutter analyze
-        working-directory: modules/${{ matrix.module }}
-      - name: Test module
-        run: flutter test
-        working-directory: modules/${{ matrix.module }}
-      - name: Pub get development host
-        run: flutter pub get
-        working-directory: apps/${{ matrix.module }}_dev_app
-      - name: Build development host
-        run: flutter build web --release
-        working-directory: apps/${{ matrix.module }}_dev_app
+      - name: Activate Melos
+        run: dart pub global activate melos
+      - name: Bootstrap workspace
+        run: melos bootstrap
+      - name: Analyze workspace
+        run: melos analyze
+      - name: Test workspace
+        run: melos test
 
   integration:
     name: Integration and release build
     runs-on: ubuntu-latest
-    needs: changes
-    if: ${{ needs.changes.outputs.food == 'true' || needs.changes.outputs.ride == 'true' || needs.changes.outputs.wallet == 'true' || needs.changes.outputs.apps == 'true' }}
+    needs: quality
     steps:
       - uses: actions/checkout@v4
       - uses: subosito/flutter-action@v2
         with:
           channel: stable
-      - name: Pub get consumer app
-        run: flutter pub get
-        working-directory: apps/consumer_app
-      - name: Analyze consumer app
-        run: flutter analyze
-        working-directory: apps/consumer_app
-      - name: Integration tests
-        run: flutter test
-        working-directory: apps/consumer_app
-      - name: Release build
-        run: flutter build web --release
-        working-directory: apps/consumer_app
+      - name: Activate Melos
+        run: dart pub global activate melos
+      - name: Bootstrap workspace
+        run: melos bootstrap
+      - name: Build development hosts
+        run: melos run build:dev-hosts
+      - name: Build production shell
+        run: melos run build:consumer

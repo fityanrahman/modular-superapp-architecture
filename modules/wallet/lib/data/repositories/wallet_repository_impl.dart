@@ -35,8 +35,9 @@ class WalletRepositoryImpl implements WalletRepository {
       return transactions;
     }
     final List<Map<String, dynamic>> rows = await _remote.fetchTransactions();
-    final List<WalletTransaction> loaded =
-        rows.map(WalletTransactionModel.fromJson).toList();
+    final List<WalletTransaction> loaded = rows
+        .map(WalletTransactionModel.fromJson)
+        .toList();
     _transactions = loaded;
     return loaded;
   }
@@ -61,10 +62,7 @@ class WalletRepositoryImpl implements WalletRepository {
       balance: account.balance - amount,
       currency: account.currency,
     );
-    return PaymentResult.success(
-      amount: amount,
-      transactionId: transaction.id,
-    );
+    return PaymentResult.success(amount: amount, transactionId: transaction.id);
   }
 
   @override

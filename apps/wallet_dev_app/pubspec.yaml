@@ -1,6 +1,7 @@
 name: wallet_dev_app
 description: "Development host application for the Wallet module only."
 publish_to: none
+resolution: workspace
 version: 1.0.0+1
 
 environment:

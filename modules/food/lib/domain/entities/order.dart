@@ -19,7 +19,13 @@ class Order extends Equatable {
   final String paymentTransactionId;
 
   @override
-  List<Object?> get props => [id, restaurantId, items, total, paymentTransactionId];
+  List<Object?> get props => [
+    id,
+    restaurantId,
+    items,
+    total,
+    paymentTransactionId,
+  ];
 }
 
 class PlaceOrderResult {

@@ -18,11 +18,7 @@ class CartItem extends Equatable {
 }
 
 class Cart extends Equatable {
-  const Cart({
-    this.restaurantId,
-    this.restaurantName,
-    this.items = const [],
-  });
+  const Cart({this.restaurantId, this.restaurantName, this.items = const []});
 
   final String? restaurantId;
   final String? restaurantName;

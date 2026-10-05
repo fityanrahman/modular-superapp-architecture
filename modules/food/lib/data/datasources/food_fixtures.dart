@@ -101,8 +101,8 @@ Map<String, Object?> foodMockRoutes() {
   final Map<String, Object?> routes = <String, Object?>{
     '/food/restaurants': _restaurants,
     '/food/orders': (Object? body) {
-      final Map<String, dynamic> payload =
-          (body as Map).cast<String, dynamic>();
+      final Map<String, dynamic> payload = (body as Map)
+          .cast<String, dynamic>();
       return <String, dynamic>{
         'id': 'ORDER-${DateTime.now().millisecondsSinceEpoch}',
         'status': 'confirmed',

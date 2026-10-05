@@ -9,17 +9,14 @@ class AppConfig {
   });
 
   const AppConfig.development({String appName = 'SuperApp'})
-      : this(
-          appName: appName,
-          environment: AppEnvironment.development,
-          enableAnalytics: false,
-        );
+    : this(
+        appName: appName,
+        environment: AppEnvironment.development,
+        enableAnalytics: false,
+      );
 
   const AppConfig.production({String appName = 'SuperApp'})
-      : this(
-          appName: appName,
-          environment: AppEnvironment.production,
-        );
+    : this(appName: appName, environment: AppEnvironment.production);
 
   final String appName;
   final AppEnvironment environment;

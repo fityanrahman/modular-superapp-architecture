@@ -44,9 +44,9 @@ class _WalletHomePageState extends State<WalletHomePage> {
           return switch (state) {
             WalletLoading() => const AppLoading(message: 'Loading wallet...'),
             WalletError(:final String message) => AppErrorView(
-                message: message,
-                onRetry: () => context.read<WalletCubit>().load(),
-              ),
+              message: message,
+              onRetry: () => context.read<WalletCubit>().load(),
+            ),
             WalletLoaded(
               :final WalletAccount account,
               :final List<WalletTransaction> transactions,

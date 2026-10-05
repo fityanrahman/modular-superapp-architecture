@@ -16,8 +16,8 @@ class RideModule implements ModuleLauncher {
     required ApiClient apiClient,
     AnalyticsService? analytics,
     AppLogger? logger,
-  })  : _analytics = analytics ?? const NoopAnalyticsService(),
-        _logger = logger ?? AppLogger(tag: 'Ride') {
+  }) : _analytics = analytics ?? const NoopAnalyticsService(),
+       _logger = logger ?? AppLogger(tag: 'Ride') {
     final RideRepository repository = RideRepositoryImpl(
       RideRemoteDataSourceImpl(apiClient),
     );

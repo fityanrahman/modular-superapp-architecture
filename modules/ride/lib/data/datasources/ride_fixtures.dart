@@ -27,5 +27,5 @@ const List<Map<String, Object?>> _destinations = [
 ];
 
 Map<String, Object?> rideMockRoutes() => <String, Object?>{
-      '/ride/destinations': _destinations,
-    };
+  '/ride/destinations': _destinations,
+};

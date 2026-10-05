@@ -42,10 +42,10 @@ class WalletCubit extends Cubit<WalletState> {
     required GetWalletAccount getWalletAccount,
     required GetTransactions getTransactions,
     required TopUp topUp,
-  })  : _getWalletAccount = getWalletAccount,
-        _getTransactions = getTransactions,
-        _topUp = topUp,
-        super(const WalletLoading());
+  }) : _getWalletAccount = getWalletAccount,
+       _getTransactions = getTransactions,
+       _topUp = topUp,
+       super(const WalletLoading());
 
   final GetWalletAccount _getWalletAccount;
   final GetTransactions _getTransactions;

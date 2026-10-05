@@ -12,13 +12,13 @@ enum RideStatus {
   cancelled;
 
   String get label => switch (this) {
-        RideStatus.requesting => 'Finding a driver',
-        RideStatus.driverAssigned => 'Driver assigned',
-        RideStatus.driverArriving => 'Driver arriving',
-        RideStatus.inProgress => 'On the way',
-        RideStatus.completed => 'Completed',
-        RideStatus.cancelled => 'Cancelled',
-      };
+    RideStatus.requesting => 'Finding a driver',
+    RideStatus.driverAssigned => 'Driver assigned',
+    RideStatus.driverArriving => 'Driver arriving',
+    RideStatus.inProgress => 'On the way',
+    RideStatus.completed => 'Completed',
+    RideStatus.cancelled => 'Cancelled',
+  };
 }
 
 class Ride extends Equatable {
@@ -39,13 +39,13 @@ class Ride extends Equatable {
   final Driver? driver;
 
   Ride copyWith({RideStatus? status, Driver? driver}) => Ride(
-        id: id,
-        pickup: pickup,
-        destination: destination,
-        fare: fare,
-        status: status ?? this.status,
-        driver: driver ?? this.driver,
-      );
+    id: id,
+    pickup: pickup,
+    destination: destination,
+    fare: fare,
+    status: status ?? this.status,
+    driver: driver ?? this.driver,
+  );
 
   @override
   List<Object?> get props => [id, pickup, destination, fare, status, driver];

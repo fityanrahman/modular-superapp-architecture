@@ -1,10 +1,7 @@
 import '../../domain/entities/wallet_account.dart';
 
 class WalletAccountModel extends WalletAccount {
-  const WalletAccountModel({
-    required super.balance,
-    required super.currency,
-  });
+  const WalletAccountModel({required super.balance, required super.currency});
 
   factory WalletAccountModel.fromJson(Map<String, dynamic> json) =>
       WalletAccountModel(
@@ -12,8 +9,5 @@ class WalletAccountModel extends WalletAccount {
         currency: json['currency'] as String? ?? 'IDR',
       );
 
-  Map<String, dynamic> toJson() => {
-        'balance': balance,
-        'currency': currency,
-      };
+  Map<String, dynamic> toJson() => {'balance': balance, 'currency': currency};
 }

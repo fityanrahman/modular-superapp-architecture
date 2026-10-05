@@ -13,17 +13,20 @@ import 'package:food/presentation/bloc/cart_cubit.dart';
 
 class _SuccessPaymentLauncher implements PaymentLauncher {
   @override
-  Future<PaymentResult> pay({required double amount, String? description}) async {
-    return PaymentResult.success(
-      amount: amount,
-      transactionId: 'TRX-TEST',
-    );
+  Future<PaymentResult> pay({
+    required double amount,
+    String? description,
+  }) async {
+    return PaymentResult.success(amount: amount, transactionId: 'TRX-TEST');
   }
 }
 
 class _FailingPaymentLauncher implements PaymentLauncher {
   @override
-  Future<PaymentResult> pay({required double amount, String? description}) async {
+  Future<PaymentResult> pay({
+    required double amount,
+    String? description,
+  }) async {
     return const PaymentResult.failure(message: 'Insufficient balance');
   }
 }

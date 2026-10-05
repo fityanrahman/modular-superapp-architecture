@@ -32,9 +32,6 @@ const List<Map<String, Object?>> _transactions = [
 ];
 
 Map<String, Object?> walletMockRoutes() => <String, Object?>{
-      '/wallet/balance': <String, Object?>{
-        'balance': _balance,
-        'currency': 'IDR',
-      },
-      '/wallet/transactions': _transactions,
-    };
+  '/wallet/balance': <String, Object?>{'balance': _balance, 'currency': 'IDR'},
+  '/wallet/transactions': _transactions,
+};

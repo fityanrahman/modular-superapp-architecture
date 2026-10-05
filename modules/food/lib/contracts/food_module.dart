@@ -18,8 +18,8 @@ class FoodModule implements ModuleLauncher {
     required PaymentLauncher paymentLauncher,
     AnalyticsService? analytics,
     AppLogger? logger,
-  })  : _analytics = analytics ?? const NoopAnalyticsService(),
-        _logger = logger ?? AppLogger(tag: 'Food') {
+  }) : _analytics = analytics ?? const NoopAnalyticsService(),
+       _logger = logger ?? AppLogger(tag: 'Food') {
     final FoodRepository repository = FoodRepositoryImpl(
       FoodRemoteDataSourceImpl(apiClient),
     );

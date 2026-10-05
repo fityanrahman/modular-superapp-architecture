@@ -20,16 +20,16 @@ void main() {
   });
 
   test('loads popular destinations from the mock API', () async {
-    final List<RideLocation> destinations =
-        await repository.getPopularDestinations();
+    final List<RideLocation> destinations = await repository
+        .getPopularDestinations();
 
     expect(destinations, isNotEmpty);
     expect(destinations.first.name, isNotEmpty);
   });
 
   test('requests a ride with an assigned driver', () async {
-    final List<RideLocation> destinations =
-        await repository.getPopularDestinations();
+    final List<RideLocation> destinations = await repository
+        .getPopularDestinations();
     final Ride ride = await repository.requestRide(
       destination: destinations.first,
     );
@@ -40,8 +40,8 @@ void main() {
   });
 
   test('advances the ride status on refresh', () async {
-    final List<RideLocation> destinations =
-        await repository.getPopularDestinations();
+    final List<RideLocation> destinations = await repository
+        .getPopularDestinations();
     final Ride ride = await repository.requestRide(
       destination: destinations.first,
     );
@@ -52,8 +52,8 @@ void main() {
   });
 
   test('ride booking cubit emits an active ride', () async {
-    final List<RideLocation> destinations =
-        await repository.getPopularDestinations();
+    final List<RideLocation> destinations = await repository
+        .getPopularDestinations();
     final RideBookingCubit cubit = RideBookingCubit(RequestRide(repository));
 
     await cubit.request(destinations.first);

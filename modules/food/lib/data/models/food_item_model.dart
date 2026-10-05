@@ -10,18 +10,18 @@ class FoodItemModel extends FoodItem {
   });
 
   factory FoodItemModel.fromJson(Map<String, dynamic> json) => FoodItemModel(
-        id: json['id'] as String,
-        name: json['name'] as String,
-        description: json['description'] as String,
-        price: (json['price'] as num).toDouble(),
-        imageEmoji: json['imageEmoji'] as String? ?? '🍽️',
-      );
+    id: json['id'] as String,
+    name: json['name'] as String,
+    description: json['description'] as String,
+    price: (json['price'] as num).toDouble(),
+    imageEmoji: json['imageEmoji'] as String? ?? '🍽️',
+  );
 
   Map<String, dynamic> toJson() => {
-        'id': id,
-        'name': name,
-        'description': description,
-        'price': price,
-        'imageEmoji': imageEmoji,
-      };
+    'id': id,
+    'name': name,
+    'description': description,
+    'price': price,
+    'imageEmoji': imageEmoji,
+  };
 }

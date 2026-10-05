@@ -23,10 +23,14 @@ super_app/
 ├── core/                  # shared infrastructure: networking, auth, analytics, logging, config
 ├── contracts/             # cross-module contracts (PaymentLauncher, ModuleLauncher, DTOs)
 ├── design_system/         # shared UI kit (colors, typography, buttons, cards, loading, theme)
-└── tooling/               # local CI scripts
+├── tooling/               # local scripts (now mostly superseded by Melos)
+├── pubspec.yaml           # Melos workspace definition and scripts
+└── MELOS.md               # what Melos adds to this monorepo
 ```
 
-Every package is a standalone Dart/Flutter package that uses relative path dependencies.
+Every package is a standalone Dart/Flutter package that uses relative path dependencies. The
+repository is wired together as a single Dart pub workspace and orchestrated with Melos; see
+[`MELOS.md`](MELOS.md) for the before/after comparison.
 
 ## Dependency direction
 
@@ -112,12 +116,15 @@ Food's code does not change — only the injected implementation changes.
 
 ## Running
 
-Each app is an independent Flutter project, so run it from its own directory:
+Bootstrap the whole workspace once from the repository root, then run any app from its own
+directory:
 
 ```bash
+# Resolve and link every local package (one command for the whole monorepo)
+melos bootstrap
+
 # Development host for the Food team (no Wallet needed)
 cd apps/food_dev_app
-flutter pub get
 flutter run            # or: flutter run -d chrome
 
 # Development hosts for the other teams
@@ -126,50 +133,49 @@ cd apps/wallet_dev_app && flutter run
 
 # Production shell with every module assembled
 cd apps/consumer_app
-flutter pub get
 flutter run            # or: flutter build web --release
 ```
 
 ## Testing
 
-Every package has its own tests. Run them per package:
+Every package has its own tests. Melos runs them across the whole workspace:
 
 ```bash
-cd modules/food && flutter test
-cd modules/wallet && flutter test
-cd apps/consumer_app && flutter test
+melos analyze   # flutter analyze in every package
+melos test      # flutter test in every package that has a test directory
+melos format    # dart format across the workspace
+```
+
+Target a subset without touching unrelated packages, letting Melos follow the dependency graph:
+
+```bash
+melos run food                                       # Food + Food dev host + their dependencies
+melos exec --scope=wallet -- flutter analyze          # just the Wallet module
+melos exec --scope=consumer_app -- flutter test       # just the production shell
 ```
 
 The `consumer_app` tests include an integration-style check that a payment made through the
 `PaymentLauncher` contract is reflected in the Wallet UI, proving the host wiring works.
 
-To run analyze + tests across the whole monorepo:
-
-```bash
-# Windows
-./tooling/scripts/ci.ps1
-
-# macOS / Linux
-./tooling/scripts/ci.sh
-```
-
-You can scope it: `./tooling/scripts/ci.sh modules`, `shared`, or `apps`.
-
 ## CI
 
-`.github/workflows/ci.yml` mirrors the build model:
+`.github/workflows/ci.yml` uses Melos to keep CI short:
 
-1. **Detect changed packages** with path filters.
-2. **Shared** packages (contracts, core, design_system): analyze + test.
-3. **Module** jobs (Food / Ride / Wallet): analyze + test + build the module's development host.
-4. **Integration** job: analyze + test + release web build of `consumer_app`.
+```text
+CI
+ ├── melos bootstrap       # resolve the whole workspace
+ ├── melos analyze         # analyze every package
+ ├── melos test            # test every package
+ └── integration build     # release web build of consumer_app + dev hosts
+```
 
 Passing module tests does not guarantee the integrated app is correct, so the integration build
-runs separately.
+runs as a separate job.
 
 ## Adding a new module
 
-1. Create `modules/<name>` as a Flutter package depending on `core`, `contracts`, `design_system`.
+1. Create `modules/<name>` as a Flutter package depending on `core`, `contracts`, `design_system`,
+   add `resolution: workspace`, and list it under `workspace:` in the root `pubspec.yaml`.
 2. Add `domain/`, `data/`, `presentation/`, `contracts/` inside `lib/`.
 3. Expose `<Name>Module implements ModuleLauncher` and a `<name>MockRoutes()` fixture.
 4. Add any cross-module interface it needs to `contracts/` (never import another module).

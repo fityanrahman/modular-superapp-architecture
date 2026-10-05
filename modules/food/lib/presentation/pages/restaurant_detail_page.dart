@@ -33,13 +33,13 @@ class RestaurantDetailPage extends StatelessWidget {
         body: BlocBuilder<RestaurantDetailCubit, RestaurantDetailState>(
           builder: (context, state) {
             return switch (state) {
-              RestaurantDetailLoading() =>
-                const AppLoading(message: 'Loading menu...'),
+              RestaurantDetailLoading() => const AppLoading(
+                message: 'Loading menu...',
+              ),
               RestaurantDetailError(:final String message) => AppErrorView(
-                  message: message,
-                  onRetry: () =>
-                      context.read<RestaurantDetailCubit>().load(),
-                ),
+                message: message,
+                onRetry: () => context.read<RestaurantDetailCubit>().load(),
+              ),
               RestaurantDetailLoaded(:final List<FoodItem> menu) =>
                 ListView.separated(
                   padding: const EdgeInsets.all(16),
@@ -73,10 +73,10 @@ class RestaurantDetailPage extends StatelessWidget {
 
   void _add(BuildContext context, FoodItem item) {
     context.read<CartCubit>().add(item, restaurant: restaurant);
-    dependencies.analytics.track(
-      'food_item_added',
-      {'restaurantId': restaurant.id, 'itemId': item.id},
-    );
+    dependencies.analytics.track('food_item_added', {
+      'restaurantId': restaurant.id,
+      'itemId': item.id,
+    });
   }
 
   int _quantity(Cart cart, String itemId) {

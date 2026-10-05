@@ -8,8 +8,8 @@ class PlaceFoodOrder {
   const PlaceFoodOrder({
     required FoodRepository repository,
     required PaymentLauncher paymentLauncher,
-  })  : _repository = repository,
-        _paymentLauncher = paymentLauncher;
+  }) : _repository = repository,
+       _paymentLauncher = paymentLauncher;
 
   final FoodRepository _repository;
   final PaymentLauncher _paymentLauncher;

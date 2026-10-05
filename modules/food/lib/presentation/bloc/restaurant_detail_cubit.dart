@@ -41,10 +41,10 @@ class RestaurantDetailCubit extends Cubit<RestaurantDetailState> {
     required String restaurantId,
     required GetRestaurantDetail getRestaurantDetail,
     required GetMenu getMenu,
-  })  : _restaurantId = restaurantId,
-        _getRestaurantDetail = getRestaurantDetail,
-        _getMenu = getMenu,
-        super(const RestaurantDetailLoading());
+  }) : _restaurantId = restaurantId,
+       _getRestaurantDetail = getRestaurantDetail,
+       _getMenu = getMenu,
+       super(const RestaurantDetailLoading());
 
   final String _restaurantId;
   final GetRestaurantDetail _getRestaurantDetail;

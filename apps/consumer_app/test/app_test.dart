@@ -10,10 +10,10 @@ import 'package:ride/ride.dart';
 import 'package:wallet/wallet.dart';
 
 Map<String, Object?> _mockRoutes() => <String, Object?>{
-      ...rideMockRoutes(),
-      ...foodMockRoutes(),
-      ...walletMockRoutes(),
-    };
+  ...rideMockRoutes(),
+  ...foodMockRoutes(),
+  ...walletMockRoutes(),
+};
 
 void main() {
   test('composition root wires the ride, food and wallet modules', () {
@@ -22,10 +22,11 @@ void main() {
       apiClient: FakeApiClient(routes: _mockRoutes(), latency: Duration.zero),
     );
 
-    expect(
-      root.modules.map((module) => module.moduleId).toList(),
-      <String>['ride', 'food', 'wallet'],
-    );
+    expect(root.modules.map((module) => module.moduleId).toList(), <String>[
+      'ride',
+      'food',
+      'wallet',
+    ]);
   });
 
   testWidgets('the application shell lists every module', (tester) async {

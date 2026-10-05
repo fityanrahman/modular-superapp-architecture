@@ -2,6 +2,7 @@ name: ride
 description: "Ride feature module: destination selection, ride request and ride status."
 version: 0.0.1
 publish_to: none
+resolution: workspace
 
 environment:
   sdk: ^3.13.4

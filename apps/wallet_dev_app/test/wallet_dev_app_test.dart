@@ -4,8 +4,9 @@ import 'package:wallet/wallet.dart';
 import 'package:wallet_dev_app/main.dart';
 
 void main() {
-  testWidgets('wallet dev app hosts the Wallet module',
-      (WidgetTester tester) async {
+  testWidgets('wallet dev app hosts the Wallet module', (
+    WidgetTester tester,
+  ) async {
     final WalletModule walletModule = WalletModule(
       apiClient: FakeApiClient(
         routes: walletMockRoutes(),

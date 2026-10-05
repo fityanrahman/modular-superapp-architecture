@@ -1,6 +1,7 @@
 name: consumer_app
 description: "SuperApp consumer application. The application shell that composes Ride, Food and Wallet."
 publish_to: none
+resolution: workspace
 version: 1.0.0+1
 
 environment:

@@ -55,16 +55,14 @@ class CartPage extends StatelessWidget {
                             ),
                           ),
                           IconButton(
-                            onPressed: () => context
-                                .read<CartCubit>()
-                                .decrement(entry.item),
+                            onPressed: () =>
+                                context.read<CartCubit>().decrement(entry.item),
                             icon: const Icon(Icons.remove_circle_outline),
                           ),
                           Text('${entry.quantity}', style: AppTypography.title),
                           IconButton(
-                            onPressed: () => context
-                                .read<CartCubit>()
-                                .increment(entry.item),
+                            onPressed: () =>
+                                context.read<CartCubit>().increment(entry.item),
                             icon: const Icon(
                               Icons.add_circle,
                               color: AppColors.primary,

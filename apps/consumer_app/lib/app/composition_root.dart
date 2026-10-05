@@ -13,7 +13,8 @@ class AppCompositionRoot {
   }) : config = config ?? const AppConfig.production() {
     final AppLogger appLogger = logger ?? AppLogger(tag: this.config.appName);
     this.logger = appLogger;
-    this.analytics = analytics ??
+    this.analytics =
+        analytics ??
         (this.config.enableAnalytics
             ? ConsoleAnalyticsService(logger: appLogger)
             : const NoopAnalyticsService());
@@ -54,8 +55,8 @@ class AppCompositionRoot {
   late final List<ModuleLauncher> modules;
 
   static Map<String, Object?> _mockRoutes() => <String, Object?>{
-        ...rideMockRoutes(),
-        ...foodMockRoutes(),
-        ...walletMockRoutes(),
-      };
+    ...rideMockRoutes(),
+    ...foodMockRoutes(),
+    ...walletMockRoutes(),
+  };
 }

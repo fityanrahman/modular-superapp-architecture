@@ -35,13 +35,12 @@ class FoodHomePage extends StatelessWidget {
           builder: (context, state) {
             return switch (state) {
               RestaurantListLoading() => const AppLoading(
-                  message: 'Loading restaurants...',
-                ),
+                message: 'Loading restaurants...',
+              ),
               RestaurantListError(:final String message) => AppErrorView(
-                  message: message,
-                  onRetry: () =>
-                      context.read<RestaurantListCubit>().load(),
-                ),
+                message: message,
+                onRetry: () => context.read<RestaurantListCubit>().load(),
+              ),
               RestaurantListLoaded(:final List<Restaurant> restaurants) =>
                 ListView.separated(
                   padding: const EdgeInsets.all(16),
@@ -63,10 +62,9 @@ class FoodHomePage extends StatelessWidget {
   }
 
   void _openRestaurant(BuildContext context, Restaurant restaurant) {
-    dependencies.analytics.track(
-      'food_restaurant_opened',
-      {'restaurantId': restaurant.id},
-    );
+    dependencies.analytics.track('food_restaurant_opened', {
+      'restaurantId': restaurant.id,
+    });
     Navigator.of(context).push(
       MaterialPageRoute<void>(
         builder: (_) => RestaurantDetailPage(

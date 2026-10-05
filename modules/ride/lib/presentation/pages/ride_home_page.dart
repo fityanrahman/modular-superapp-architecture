@@ -22,13 +22,10 @@ class RideHomePage extends StatelessWidget {
       child: BlocListener<RideBookingCubit, RideBookingState>(
         listener: (context, state) {
           if (state is RideBookingActive) {
-            dependencies.analytics.track(
-              'ride_requested',
-              {
-                'rideId': state.ride.id,
-                'destination': state.ride.destination.name,
-              },
-            );
+            dependencies.analytics.track('ride_requested', {
+              'rideId': state.ride.id,
+              'destination': state.ride.destination.name,
+            });
             Navigator.of(context).push(
               MaterialPageRoute<void>(
                 builder: (_) => RideStatusPage(
@@ -39,9 +36,8 @@ class RideHomePage extends StatelessWidget {
               ),
             );
           } else if (state is RideBookingFailure) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text(state.message)),
-            );
+            ScaffoldMessenger.of(context)
+                .showSnackBar(SnackBar(content: Text(state.message)));
           }
         },
         child: Scaffold(
@@ -65,8 +61,8 @@ class RideHomePage extends StatelessWidget {
                   builder: (context, state) {
                     return switch (state) {
                       DestinationListLoading() => const AppLoading(
-                          message: 'Loading destinations...',
-                        ),
+                        message: 'Loading destinations...',
+                      ),
                       DestinationListError(:final String message) =>
                         AppErrorView(
                           message: message,
@@ -74,7 +70,7 @@ class RideHomePage extends StatelessWidget {
                               context.read<DestinationListCubit>().load(),
                         ),
                       DestinationListLoaded(
-                        :final List<RideLocation> destinations
+                        :final List<RideLocation> destinations,
                       ) =>
                         ListView.separated(
                           padding: const EdgeInsets.all(16),
@@ -86,8 +82,7 @@ class RideHomePage extends StatelessWidget {
                                 destinations[index];
                             return DestinationTile(
                               destination: destination,
-                              onRequest: () =>
-                                  _request(context, destination),
+                              onRequest: () => _request(context, destination),
                             );
                           },
                         ),
@@ -103,10 +98,9 @@ class RideHomePage extends StatelessWidget {
   }
 
   void _request(BuildContext context, RideLocation destination) {
-    dependencies.analytics.track(
-      'ride_destination_selected',
-      {'destination': destination.name},
-    );
+    dependencies.analytics.track('ride_destination_selected', {
+      'destination': destination.name,
+    });
     context.read<RideBookingCubit>().request(destination);
   }
 }

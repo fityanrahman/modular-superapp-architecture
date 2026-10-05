@@ -79,11 +79,11 @@ class RideRepositoryImpl implements RideRepository {
   }
 
   RideStatus _nextStatus(RideStatus status) => switch (status) {
-        RideStatus.requesting => RideStatus.driverAssigned,
-        RideStatus.driverAssigned => RideStatus.driverArriving,
-        RideStatus.driverArriving => RideStatus.inProgress,
-        RideStatus.inProgress => RideStatus.completed,
-        RideStatus.completed => RideStatus.completed,
-        RideStatus.cancelled => RideStatus.cancelled,
-      };
+    RideStatus.requesting => RideStatus.driverAssigned,
+    RideStatus.driverAssigned => RideStatus.driverArriving,
+    RideStatus.driverArriving => RideStatus.inProgress,
+    RideStatus.inProgress => RideStatus.completed,
+    RideStatus.completed => RideStatus.completed,
+    RideStatus.cancelled => RideStatus.cancelled,
+  };
 }

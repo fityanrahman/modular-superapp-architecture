@@ -28,8 +28,9 @@ class FoodRepositoryImpl implements FoodRepository {
 
   @override
   Future<List<FoodItem>> getMenu(String restaurantId) async {
-    final List<Map<String, dynamic>> rows =
-        await _remote.fetchMenu(restaurantId);
+    final List<Map<String, dynamic>> rows = await _remote.fetchMenu(
+      restaurantId,
+    );
     return rows.map(FoodItemModel.fromJson).toList();
   }
 
@@ -41,12 +42,14 @@ class FoodRepositoryImpl implements FoodRepository {
     final Map<String, dynamic> json = await _remote.submitOrder({
       'restaurantId': cart.restaurantId,
       'items': cart.items
-          .map((item) => {
-                'id': item.item.id,
-                'name': item.item.name,
-                'quantity': item.quantity,
-                'price': item.item.price,
-              })
+          .map(
+            (item) => {
+              'id': item.item.id,
+              'name': item.item.name,
+              'quantity': item.quantity,
+              'price': item.item.price,
+            },
+          )
           .toList(),
       'total': cart.subtotal,
       'paymentTransactionId': payment.transactionId,
@@ -54,12 +57,12 @@ class FoodRepositoryImpl implements FoodRepository {
 
     return Order(
       id: json['id'] as String,
-      restaurantId: (json['restaurantId'] as String?) ??
-          cart.restaurantId ??
-          'unknown',
+      restaurantId:
+          (json['restaurantId'] as String?) ?? cart.restaurantId ?? 'unknown',
       items: cart.items,
       total: (json['total'] as num).toDouble(),
-      paymentTransactionId: (json['paymentTransactionId'] as String?) ??
+      paymentTransactionId:
+          (json['paymentTransactionId'] as String?) ??
           payment.transactionId ??
           'unknown',
     );

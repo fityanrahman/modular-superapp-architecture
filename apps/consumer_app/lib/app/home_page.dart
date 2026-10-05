@@ -45,9 +45,7 @@ class SuperAppHomePage extends StatelessWidget {
               children: [
                 Icon(module.icon, size: 28, color: AppColors.primary),
                 const SizedBox(width: 16),
-                Expanded(
-                  child: Text(module.title, style: AppTypography.title),
-                ),
+                Expanded(child: Text(module.title, style: AppTypography.title)),
                 const Icon(Icons.chevron_right),
               ],
             ),

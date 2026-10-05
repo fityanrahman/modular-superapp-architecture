@@ -18,8 +18,8 @@ class WalletModule implements ModuleLauncher {
     required ApiClient apiClient,
     AnalyticsService? analytics,
     AppLogger? logger,
-  })  : _analytics = analytics ?? const NoopAnalyticsService(),
-        _logger = logger ?? AppLogger(tag: 'Wallet') {
+  }) : _analytics = analytics ?? const NoopAnalyticsService(),
+       _logger = logger ?? AppLogger(tag: 'Wallet') {
     final WalletRepository repository = WalletRepositoryImpl(
       WalletRemoteDataSourceImpl(apiClient),
     );

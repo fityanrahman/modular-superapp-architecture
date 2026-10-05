@@ -1,0 +1,45 @@
+name: modular_superapp_architecture
+description: SuperApp modular Flutter monorepo orchestrated with Melos and pub workspaces.
+publish_to: none
+
+environment:
+  sdk: ^3.13.4
+
+dev_dependencies:
+  melos: ^8.9.0
+
+workspace:
+  - apps/consumer_app
+  - apps/food_dev_app
+  - apps/ride_dev_app
+  - apps/wallet_dev_app
+  - modules/food
+  - modules/ride
+  - modules/wallet
+  - core
+  - contracts
+  - design_system
+
+melos:
+  scripts:
+    analyze:
+      description: Run flutter analyze in every workspace package.
+      run: melos exec -- flutter analyze
+    test:
+      description: Run tests in every package that has a test directory.
+      run: melos exec --dir-exists=test -- flutter test
+    format:
+      description: Format all Dart code in the workspace.
+      run: dart format apps modules core contracts design_system
+    format:check:
+      description: Verify formatting without modifying files.
+      run: dart format --output=none --set-exit-if-changed apps modules core contracts design_system
+    build:consumer:
+      description: Build the production shell (consumer_app) for the web.
+      run: melos exec --scope=consumer_app -- flutter build web --release
+    build:dev-hosts:
+      description: Build every development host application for the web.
+      run: melos exec --scope=food_dev_app --scope=ride_dev_app --scope=wallet_dev_app -- flutter build web --release
+    food:
+      description: Analyze and test only the Food module, its dev host, and its dependencies.
+      run: melos exec --scope=food --scope=food_dev_app --include-dependencies -- flutter analyze && melos exec --scope=food --scope=food_dev_app --dir-exists=test -- flutter test

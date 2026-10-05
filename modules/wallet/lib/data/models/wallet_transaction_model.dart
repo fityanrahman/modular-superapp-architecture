@@ -19,10 +19,10 @@ class WalletTransactionModel extends WalletTransaction {
       );
 
   Map<String, dynamic> toJson() => {
-        'id': id,
-        'title': title,
-        'amount': amount,
-        'date': date.toIso8601String(),
-        'type': type,
-      };
+    'id': id,
+    'title': title,
+    'amount': amount,
+    'date': date.toIso8601String(),
+    'type': type,
+  };
 }

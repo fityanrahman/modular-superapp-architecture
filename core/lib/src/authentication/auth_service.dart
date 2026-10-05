@@ -16,7 +16,8 @@ abstract interface class AuthService {
 }
 
 class InMemoryAuthService implements AuthService {
-  InMemoryAuthService({AuthSession? initialSession}) : _current = initialSession;
+  InMemoryAuthService({AuthSession? initialSession})
+    : _current = initialSession;
 
   final StreamController<AuthSession?> _controller =
       StreamController<AuthSession?>.broadcast();

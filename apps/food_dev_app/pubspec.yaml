@@ -1,6 +1,7 @@
 name: food_dev_app
 description: "Development host application for the Food module only, using a MockPaymentLauncher."
 publish_to: none
+resolution: workspace
 version: 1.0.0+1
 
 environment:

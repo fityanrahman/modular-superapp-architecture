@@ -10,7 +10,8 @@ class RestaurantModel extends Restaurant {
     super.imageEmoji,
   });
 
-  factory RestaurantModel.fromJson(Map<String, dynamic> json) => RestaurantModel(
+  factory RestaurantModel.fromJson(Map<String, dynamic> json) =>
+      RestaurantModel(
         id: json['id'] as String,
         name: json['name'] as String,
         cuisine: json['cuisine'] as String,
@@ -20,11 +21,11 @@ class RestaurantModel extends Restaurant {
       );
 
   Map<String, dynamic> toJson() => {
-        'id': id,
-        'name': name,
-        'cuisine': cuisine,
-        'rating': rating,
-        'deliveryEtaMinutes': deliveryEtaMinutes,
-        'imageEmoji': imageEmoji,
-      };
+    'id': id,
+    'name': name,
+    'cuisine': cuisine,
+    'rating': rating,
+    'deliveryEtaMinutes': deliveryEtaMinutes,
+    'imageEmoji': imageEmoji,
+  };
 }

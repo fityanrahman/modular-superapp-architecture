@@ -3,17 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  testWidgets('PrimaryButton renders its label and reacts to taps',
-      (WidgetTester tester) async {
+  testWidgets('PrimaryButton renders its label and reacts to taps', (
+    WidgetTester tester,
+  ) async {
     var tapped = false;
 
     await tester.pumpWidget(
       MaterialApp(
         home: Scaffold(
-          body: PrimaryButton(
-            label: 'Pay now',
-            onPressed: () => tapped = true,
-          ),
+          body: PrimaryButton(label: 'Pay now', onPressed: () => tapped = true),
         ),
       ),
     );

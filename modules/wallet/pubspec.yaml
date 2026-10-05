@@ -2,6 +2,7 @@ name: wallet
 description: "Wallet feature module: balance, payment and transaction history. Implements PaymentLauncher."
 version: 0.0.1
 publish_to: none
+resolution: workspace
 
 environment:
   sdk: ^3.13.4

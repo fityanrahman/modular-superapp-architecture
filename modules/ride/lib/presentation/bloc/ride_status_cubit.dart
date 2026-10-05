@@ -38,13 +38,13 @@ class RideStatusCubit extends Cubit<RideStatusState> {
     required String rideId,
     required GetRideStatus getRideStatus,
     Ride? initialRide,
-  })  : _rideId = rideId,
-        _getRideStatus = getRideStatus,
-        super(
-          initialRide == null
-              ? const RideStatusLoading()
-              : RideStatusLoaded(initialRide),
-        );
+  }) : _rideId = rideId,
+       _getRideStatus = getRideStatus,
+       super(
+         initialRide == null
+             ? const RideStatusLoading()
+             : RideStatusLoaded(initialRide),
+       );
 
   final String _rideId;
   final GetRideStatus _getRideStatus;

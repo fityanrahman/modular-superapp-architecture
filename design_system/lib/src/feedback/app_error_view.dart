@@ -4,11 +4,7 @@ import '../buttons/primary_button.dart';
 import '../colors/app_colors.dart';
 
 class AppErrorView extends StatelessWidget {
-  const AppErrorView({
-    super.key,
-    required this.message,
-    this.onRetry,
-  });
+  const AppErrorView({super.key, required this.message, this.onRetry});
 
   final String message;
   final VoidCallback? onRetry;
@@ -26,11 +22,7 @@ class AppErrorView extends StatelessWidget {
             Text(message, textAlign: TextAlign.center),
             if (onRetry != null) ...[
               const SizedBox(height: 16),
-              PrimaryButton(
-                label: 'Retry',
-                expand: false,
-                onPressed: onRetry,
-              ),
+              PrimaryButton(label: 'Retry', expand: false, onPressed: onRetry),
             ],
           ],
         ),

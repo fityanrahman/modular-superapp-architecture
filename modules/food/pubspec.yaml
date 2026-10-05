@@ -2,6 +2,7 @@ name: food
 description: "Food feature module: restaurants, menu, cart, checkout and ordering."
 version: 0.0.1
 publish_to: none
+resolution: workspace
 
 environment:
   sdk: ^3.13.4

@@ -40,9 +40,8 @@ class _WalletPaymentPageState extends State<WalletPaymentPage> {
               ),
             );
           } else if (state is PaymentFailure) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text(state.message)),
-            );
+            ScaffoldMessenger.of(context)
+                .showSnackBar(SnackBar(content: Text(state.message)));
           }
         },
         builder: (context, state) {
@@ -79,9 +78,9 @@ class _WalletPaymentPageState extends State<WalletPaymentPage> {
                       icon: Icons.lock_outline,
                       isLoading: state is PaymentProcessing,
                       onPressed: () => context.read<PaymentCubit>().pay(
-                            amount: _amount,
-                            description: 'Wallet payment',
-                          ),
+                        amount: _amount,
+                        description: 'Wallet payment',
+                      ),
                     ),
                   ],
                 ),

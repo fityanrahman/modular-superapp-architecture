@@ -35,7 +35,7 @@ class RestaurantListError extends RestaurantListState {
 
 class RestaurantListCubit extends Cubit<RestaurantListState> {
   RestaurantListCubit(this._getRestaurants)
-      : super(const RestaurantListLoading());
+    : super(const RestaurantListLoading());
 
   final GetRestaurants _getRestaurants;
 

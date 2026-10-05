@@ -36,10 +36,7 @@ class DestinationTile extends StatelessWidget {
               ],
             ),
           ),
-          TextButton(
-            onPressed: onRequest,
-            child: const Text('Request'),
-          ),
+          TextButton(onPressed: onRequest, child: const Text('Request')),
         ],
       ),
     );

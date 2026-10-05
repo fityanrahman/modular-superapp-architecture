@@ -28,8 +28,9 @@ void main() {
     expect(result.message, 'Mock payment declined');
   });
 
-  testWidgets('food dev app hosts the Food module without the Wallet module',
-      (WidgetTester tester) async {
+  testWidgets('food dev app hosts the Food module without the Wallet module', (
+    WidgetTester tester,
+  ) async {
     final FoodModule foodModule = FoodModule(
       apiClient: FakeApiClient(
         routes: foodMockRoutes(),

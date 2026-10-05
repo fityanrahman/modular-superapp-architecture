@@ -19,11 +19,11 @@ class Restaurant extends Equatable {
 
   @override
   List<Object?> get props => [
-        id,
-        name,
-        cuisine,
-        rating,
-        deliveryEtaMinutes,
-        imageEmoji,
-      ];
+    id,
+    name,
+    cuisine,
+    rating,
+    deliveryEtaMinutes,
+    imageEmoji,
+  ];
 }

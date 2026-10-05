@@ -22,10 +22,10 @@ class CheckoutPage extends StatelessWidget {
       child: BlocConsumer<CheckoutCubit, CheckoutState>(
         listener: (context, state) {
           if (state is CheckoutSuccess) {
-            dependencies.analytics.track(
-              'food_order_placed',
-              {'orderId': state.order.id, 'total': state.order.total},
-            );
+            dependencies.analytics.track('food_order_placed', {
+              'orderId': state.order.id,
+              'total': state.order.total,
+            });
             context.read<CartCubit>().clear();
             Navigator.of(context).pushReplacement(
               MaterialPageRoute<void>(
@@ -36,9 +36,8 @@ class CheckoutPage extends StatelessWidget {
               ),
             );
           } else if (state is CheckoutFailure) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text(state.message)),
-            );
+            ScaffoldMessenger.of(context)
+                .showSnackBar(SnackBar(content: Text(state.message)));
           }
         },
         builder: (context, state) {

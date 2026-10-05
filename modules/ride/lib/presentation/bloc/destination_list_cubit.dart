@@ -35,7 +35,7 @@ class DestinationListError extends DestinationListState {
 
 class DestinationListCubit extends Cubit<DestinationListState> {
   DestinationListCubit(this._getPopularDestinations)
-      : super(const DestinationListLoading());
+    : super(const DestinationListLoading());
 
   final GetPopularDestinations _getPopularDestinations;
 

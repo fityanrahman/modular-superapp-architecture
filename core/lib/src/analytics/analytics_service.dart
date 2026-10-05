@@ -6,7 +6,7 @@ abstract interface class AnalyticsService {
 
 class ConsoleAnalyticsService implements AnalyticsService {
   ConsoleAnalyticsService({AppLogger? logger})
-      : _logger = logger ?? AppLogger(tag: 'Analytics');
+    : _logger = logger ?? AppLogger(tag: 'Analytics');
 
   final AppLogger _logger;
   final List<String> trackedEvents = [];

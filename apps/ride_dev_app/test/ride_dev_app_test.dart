@@ -4,7 +4,9 @@ import 'package:ride/ride.dart';
 import 'package:ride_dev_app/main.dart';
 
 void main() {
-  testWidgets('ride dev app hosts the Ride module', (WidgetTester tester) async {
+  testWidgets('ride dev app hosts the Ride module', (
+    WidgetTester tester,
+  ) async {
     final RideModule rideModule = RideModule(
       apiClient: FakeApiClient(
         routes: rideMockRoutes(),

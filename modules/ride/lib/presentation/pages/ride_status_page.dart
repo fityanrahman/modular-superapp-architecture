@@ -49,12 +49,12 @@ class RideStatusPage extends StatelessWidget {
           builder: (context, state) {
             return switch (state) {
               RideStatusLoading() => const AppLoading(
-                  message: 'Refreshing status...',
-                ),
+                message: 'Refreshing status...',
+              ),
               RideStatusError(:final String message) => AppErrorView(
-                  message: message,
-                  onRetry: () => context.read<RideStatusCubit>().load(),
-                ),
+                message: message,
+                onRetry: () => context.read<RideStatusCubit>().load(),
+              ),
               RideStatusLoaded(:final Ride ride) => _RideStatusBody(ride: ride),
             };
           },
