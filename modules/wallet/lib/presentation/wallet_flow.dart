@@ -25,19 +25,8 @@ class _WalletFlowState extends State<WalletFlow> {
         getTransactions: widget.dependencies.getTransactions,
         topUp: widget.dependencies.topUp,
       )..load(),
-      child: PopScope(
-        canPop: false,
-        onPopInvokedWithResult: (bool didPop, Object? result) {
-          if (didPop) {
-            return;
-          }
-          final NavigatorState? nested = _navigatorKey.currentState;
-          if (nested != null && nested.canPop()) {
-            nested.pop();
-          } else {
-            Navigator.of(context, rootNavigator: true).maybePop();
-          }
-        },
+      child: NavigatorPopHandler(
+        onPopWithResult: (_) => _navigatorKey.currentState?.pop(),
         child: Navigator(
           key: _navigatorKey,
           onGenerateRoute: (settings) => MaterialPageRoute<void>(
