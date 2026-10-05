@@ -21,19 +21,8 @@ class _RideFlowState extends State<RideFlow> {
   Widget build(BuildContext context) {
     return BlocProvider<RideBookingCubit>(
       create: (_) => RideBookingCubit(widget.dependencies.requestRide),
-      child: PopScope(
-        canPop: false,
-        onPopInvokedWithResult: (bool didPop, Object? result) {
-          if (didPop) {
-            return;
-          }
-          final NavigatorState? nested = _navigatorKey.currentState;
-          if (nested != null && nested.canPop()) {
-            nested.pop();
-          } else {
-            Navigator.of(context, rootNavigator: true).maybePop();
-          }
-        },
+      child: NavigatorPopHandler(
+        onPopWithResult: (_) => _navigatorKey.currentState?.pop(),
         child: Navigator(
           key: _navigatorKey,
           onGenerateRoute: (settings) => MaterialPageRoute<void>(

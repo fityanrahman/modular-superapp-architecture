@@ -73,4 +73,60 @@ void main() {
       expect(find.text('Rp 200.000'), findsOneWidget);
     },
   );
+
+  for (final String module in <String>['Ride', 'Food', 'Wallet']) {
+    testWidgets(
+      'system back leaves the $module module and returns to the shell',
+      (WidgetTester tester) async {
+        final AppCompositionRoot root = AppCompositionRoot(
+          config: const AppConfig.development(),
+          apiClient: FakeApiClient(
+            routes: _mockRoutes(),
+            latency: Duration.zero,
+          ),
+        );
+
+        await tester.pumpWidget(ConsumerApp(compositionRoot: root));
+        await tester.pumpAndSettle();
+
+        await tester.tap(find.text(module));
+        await tester.pumpAndSettle();
+        expect(find.text('SuperApp'), findsNothing);
+
+        await tester.binding.handlePopRoute();
+        await tester.pumpAndSettle();
+
+        expect(find.text('SuperApp'), findsOneWidget);
+      },
+    );
+  }
+
+  testWidgets(
+    'system back pops the module navigator before leaving the module',
+    (WidgetTester tester) async {
+      final AppCompositionRoot root = AppCompositionRoot(
+        config: const AppConfig.development(),
+        apiClient: FakeApiClient(routes: _mockRoutes(), latency: Duration.zero),
+      );
+
+      await tester.pumpWidget(ConsumerApp(compositionRoot: root));
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.text('Food'));
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.text('Nusantara Kitchen'));
+      await tester.pumpAndSettle();
+      expect(find.text('Nasi Goreng Special'), findsOneWidget);
+
+      await tester.binding.handlePopRoute();
+      await tester.pumpAndSettle();
+      expect(find.text('Nasi Goreng Special'), findsNothing);
+      expect(find.text('SuperApp'), findsNothing);
+
+      await tester.binding.handlePopRoute();
+      await tester.pumpAndSettle();
+      expect(find.text('SuperApp'), findsOneWidget);
+    },
+  );
 }
