@@ -11,7 +11,7 @@ adds workspace management and a set of commands that operate across the workspac
 ## Before / After
 
 ```text
-BEFORE (master)
+BEFORE (main)
 
 Flutter/Dart packages
         +
@@ -149,7 +149,7 @@ matrix that had to know every package path. Adding a package means adding it to 
 
 5. **When are plain path dependencies still sufficient?**
    For small repos (a handful of packages) where a single `flutter pub get` and CI matrix are
-   already manageable. The architecture in this repository worked without Melos on `master`; Melos
+   already manageable. The architecture in this repository worked without Melos on `main`; Melos
    is a tooling convenience, not a requirement.
 
 ## Running the old scripts
